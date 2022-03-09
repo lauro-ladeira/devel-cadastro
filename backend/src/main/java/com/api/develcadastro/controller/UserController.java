@@ -55,7 +55,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateEmployee(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updateUser(@PathVariable(value = "id") UUID id,
                                                    @Valid @RequestBody UserDTO userDetails) {
         Optional<UserModel> userModelOptional = userService.findById(id);
         if (!userModelOptional.isPresent()) {
@@ -70,4 +70,20 @@ public class UserController {
 
         return ResponseEntity.ok(updatedUser);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Object> deleteUser(
+            @PathVariable(value = "id")
+                    UUID id
+    ) {
+        Optional<UserModel> parkingSpotModelOptional = userService.findById(id);
+        if (!parkingSpotModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
+        }
+        userService.deleteUser(id);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Parking Spot: " + parkingSpotModelOptional.get().getParkingSpotNumber() + " deleted!");
+    }
+
+
 }
