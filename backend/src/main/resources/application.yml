@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/parking-control-db
+    url: jdbc:postgresql://localhost:5432/devel-cadastro-db
     username: postgres
     password: admin
   jpa:

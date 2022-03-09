@@ -30,8 +30,8 @@ public class UserController {
         var userModel = new UserModel();
         BeanUtils.copyProperties(userDTO, userModel);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        userModel.setBirthDate(LocalDate.parse(userDTO.getBirthDate(), formatter));
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+//        userModel.setBirthDate(LocalDate.parse(userDTO.getBirthDate(), formatter));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userModel));
 
@@ -63,8 +63,8 @@ public class UserController {
         }
         BeanUtils.copyProperties(userDetails, userModelOptional.get());
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
-        userModelOptional.get().setBirthDate(LocalDate.parse(userDetails.getBirthDate(), formatter));
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        //userModelOptional.get().setBirthDate(LocalDate.parse(userDetails.getBirthDate(), formatter));
 
        UserModel updatedUser = userService.save(userModelOptional.get());
 

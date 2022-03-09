@@ -21,7 +21,7 @@ public class UserModel implements Serializable {
     private String profilePhoto;
 
     @Column(name = "birth_date")
-    private LocalDate birthDate;
+    private String birthDate;
 
     public UUID getId() {
         return id;
@@ -47,11 +47,12 @@ public class UserModel implements Serializable {
         this.profilePhoto = profilePhoto;
     }
 
-    public LocalDate getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 }
+

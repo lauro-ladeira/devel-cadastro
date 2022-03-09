@@ -1,24 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { View, FlatList, Alert } from 'react-native'
 import axios from "axios";
-import { Button, Icon, ListItem } from 'react-native-elements';
+import { Button, Icon, ListItem, Avatar } from 'react-native-elements';
+import UsersContext from '../context/UsersContext';
 
 export default props => {
-    const [users, setUsers] = useState([])
+    //const [users, setUsers] = useState([])
 
-    useEffect(() => {
+    const { state } = useContext(UsersContext)
+    console.log(state)
+
+/*     useEffect(() => {
         const fetchData = async () => {
             try {
                 const { data: response } = await axios.get('http://192.168.15.17:8080/users');
                 setUsers(response);
-                console.log(response)
+
             } catch (error) {
                 console.error(error.message);
             }
         }
 
         fetchData();
-    }, []);
+    }, []); */
 
     function confirmUserDeletion(user) {
         Alert.alert('Excluir Usuário', 'Deseja excluir o usuário?', [
@@ -41,9 +45,9 @@ export default props => {
                 bottomDivider
                 onPress={() => props.navigation.navigate('UserForm', user)}
             >
+                <Avatar size={40} source={{ uri: user.profilePhoto }} />
                 <ListItem.Content>
                     <ListItem.Title>{user.name}</ListItem.Title>
-                    <ListItem.Subtitle>{user.profilePhoto}</ListItem.Subtitle>
                 </ListItem.Content>
                 <Button
                     onPress={() => props.navigation.navigate('UserForm', user)}
@@ -63,7 +67,7 @@ export default props => {
         <View>
             <FlatList
                 keyExtractor={user => user.id.toString()}
-                data={users}
+                data={state}
                 renderItem={getUserItem}
             />
         </View>
